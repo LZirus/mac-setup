@@ -56,6 +56,8 @@ Every installed tool with a one-line description and its exact uninstall command
 | azure-cli, azcopy, azure-dev | Azure CLI / data copy / dev CLI (azd) | `brew uninstall azure-cli azcopy azure-dev` |
 | awscli, aws-vault, eksctl, session-manager-plugin | AWS CLI / creds / EKS / SSM | `brew uninstall awscli aws-vault eksctl` · `brew uninstall --cask session-manager-plugin` |
 | freelens | Kubernetes GUI | `brew uninstall --cask freelens` |
+| mongodb-compass | MongoDB GUI (browse/query/analyze) | `brew uninstall --cask mongodb-compass` |
+| mongosh | MongoDB Shell (CLI) | `brew uninstall mongosh` |
 
 ## 5. Local AI (LLM + ML/CV)
 | Tool | What | Uninstall |

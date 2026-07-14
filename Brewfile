@@ -97,6 +97,8 @@ brew "eksctl"
 cask "session-manager-plugin"
 cask "freelens"                      # K8s GUI (OpenLens successor)
 # Portainer runs as a Docker container (see post-install.sh, optional)
+cask "mongodb-compass"               # MongoDB GUI (browse/query/analyze)
+brew "mongosh"                       # MongoDB Shell (CLI companion)
 
 # ---- 5. Local AI (LLM + ML/CV) --------------------------------------------
 brew "ollama"                        # LLM runtime/server (MLX-backed)
