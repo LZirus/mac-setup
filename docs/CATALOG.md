@@ -58,6 +58,8 @@ Every installed tool with a one-line description and its exact uninstall command
 | freelens | Kubernetes GUI | `brew uninstall --cask freelens` |
 | mongodb-compass | MongoDB GUI (browse/query/analyze) | `brew uninstall --cask mongodb-compass` |
 | mongosh | MongoDB Shell (CLI) | `brew uninstall mongosh` |
+| redis-insight | Redis GUI (official; connect to your own server) | `brew uninstall --cask redis-insight` |
+| redis | Redis CLI (`redis-cli`); server not autostarted | `brew uninstall redis` |
 
 ## 5. Local AI (LLM + ML/CV)
 | Tool | What | Uninstall |
