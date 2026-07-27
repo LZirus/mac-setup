@@ -23,6 +23,7 @@ The guiding principle: everything is documented and **easy to uninstall**.
 │   ├── MANUAL-STEPS.md   # steps that can't be scripted (sudo, App Store, hardware…)
 │   ├── STRUCTURE.md      # a folder/naming convention for code & documents
 │   ├── EXPLORE-LATER.md  # curated discovery backlog (not installed yet)
+│   ├── container-runtimes.md # Colima vs. Apple `container` — comparison + install/uninstall
 │   └── docker-services.md# helper services to run via Colima (Portainer, Dockge)
 ├── PROFILE.example.md    # template for personal context (real PROFILE.md is gitignored)
 └── user.env.example      # template for local secrets/identity (real user.env is gitignored)

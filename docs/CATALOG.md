@@ -47,7 +47,8 @@ Every installed tool with a one-line description and its exact uninstall command
 ## 4. Cloud / DevOps / Containers
 | Tool | What | Uninstall |
 |---|---|---|
-| colima, docker, docker-compose | Container runtime + CLI | `brew uninstall colima docker docker-compose` |
+| colima, docker, docker-compose | Container runtime + CLI (**default** — see docs/container-runtimes.md) | `brew uninstall colima docker docker-compose` |
+| apple `container` | VM-per-container runtime (macOS 26; .pkg, not brew; isolation/sandbox niche) | `/usr/local/bin/uninstall-container.sh -d` |
 | lazydocker, dive | Docker TUI / image inspector | `brew uninstall lazydocker dive` |
 | kubernetes-cli, k9s, helm, kustomize | kubectl + K8s ecosystem | `brew uninstall kubernetes-cli k9s helm kustomize` |
 | kubectx, stern, k3d | ctx/ns switch / log tail / local cluster | `brew uninstall kubectx stern k3d` |
