@@ -60,7 +60,32 @@ Every installed tool with a one-line description and its exact uninstall command
 | mongodb-compass | MongoDB GUI (browse/query/analyze) | `brew uninstall --cask mongodb-compass` |
 | mongosh | MongoDB Shell (CLI) | `brew uninstall mongosh` |
 | redis-insight | Redis GUI (official; connect to your own server) | `brew uninstall --cask redis-insight` |
+| postgresql@17 | PostgreSQL 17 server + `psql`. **Keg-only** — needs PATH (see below) | `brew services stop postgresql@17 && brew uninstall postgresql@17` (data: `rm -rf /opt/homebrew/var/postgresql@17`) |
+| dbeaver-community | Universal SQL GUI (Postgres, MySQL, SQLite, ...) | `brew uninstall --cask dbeaver-community` |
 | redis | Redis CLI (`redis-cli`); server not autostarted | `brew uninstall redis` |
+
+### PostgreSQL — first run
+
+`postgresql@17` is **keg-only**: Homebrew does not link it into `PATH`, so a plain
+`psql` will report *command not found* even though it is installed.
+
+```bash
+# once, in ~/.zshrc
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+brew services start postgresql@17     # start now + at login
+brew services stop  postgresql@17     # stop
+pg_isready                            # health check
+psql -d postgres                      # shell (superuser = your macOS user)
+```
+
+The install already created a cluster at `/opt/homebrew/var/postgresql@17`
+(locale `en_US.UTF-8`). There is **no** `postgres` role and no password — you
+connect as your macOS user via local socket. Fine for local dev, not for anything
+reachable from outside.
+
+Everyday commands: `createdb NAME` · `dropdb NAME` · `psql -l` (list) ·
+`psql -d NAME -f file.sql` · `pg_dump NAME > dump.sql`.
 
 ## 5. Local AI (LLM + ML/CV)
 | Tool | What | Uninstall |

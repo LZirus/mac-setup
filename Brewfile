@@ -101,6 +101,8 @@ cask "mongodb-compass"               # MongoDB GUI (browse/query/analyze)
 brew "mongosh"                       # MongoDB Shell (CLI companion)
 cask "redis-insight"                 # Redis GUI (official; connect to your own server)
 brew "redis"                         # Redis CLI (redis-cli); server NOT autostarted
+brew "postgresql@17"                 # PostgreSQL 17 (server + psql). Keg-only: see CATALOG for PATH
+cask "dbeaver-community"             # SQL GUI (Postgres/MySQL/SQLite/...); universal client
 
 # ---- 5. Local AI (LLM + ML/CV) --------------------------------------------
 brew "ollama"                        # LLM runtime/server (MLX-backed)
