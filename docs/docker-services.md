@@ -30,5 +30,20 @@ docker run -d --name dockge --restart=always -p 5001:5001 \
 # → http://localhost:5001
 ```
 
+## `docker compose` (v2 syntax) — one symlink
+
+Homebrew installs Compose as a standalone `docker-compose` binary. The modern
+subcommand form `docker compose` needs it registered as a CLI plugin, otherwise
+you get `unknown shorthand flag: 'd' in -d` — a confusing error, because it looks
+like a flag problem, not a missing plugin.
+
+```bash
+mkdir -p ~/.docker/cli-plugins
+ln -sf /opt/homebrew/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+docker compose version    # verify
+```
+
+Both forms work afterwards. Every compose file in the wild assumes `docker compose`.
+
 ## Terminal alternative
 `lazydocker` (already installed) — TUI, no browser needed.
