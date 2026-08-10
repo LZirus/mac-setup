@@ -60,19 +60,18 @@ Every installed tool with a one-line description and its exact uninstall command
 | mongodb-compass | MongoDB GUI (browse/query/analyze) | `brew uninstall --cask mongodb-compass` |
 | mongosh | MongoDB Shell (CLI) | `brew uninstall mongosh` |
 | redis-insight | Redis GUI (official; connect to your own server) | `brew uninstall --cask redis-insight` |
-| postgresql@17 | PostgreSQL 17 server + `psql`. **Keg-only** — needs PATH (see below) | `brew services stop postgresql@17 && brew uninstall postgresql@17` (data: `rm -rf /opt/homebrew/var/postgresql@17`) |
+| postgresql@17 | PostgreSQL 17 server + `psql`. Keg-only but **linked on purpose** (`link: true`) | `brew services stop postgresql@17 && brew uninstall postgresql@17` (data: `rm -rf /opt/homebrew/var/postgresql@17`) |
 | dbeaver-community | Universal SQL GUI (Postgres, MySQL, SQLite, ...) | `brew uninstall --cask dbeaver-community` |
 | redis | Redis CLI (`redis-cli`); server not autostarted | `brew uninstall redis` |
 
 ### PostgreSQL — first run
 
-`postgresql@17` is **keg-only**: Homebrew does not link it into `PATH`, so a plain
-`psql` will report *command not found* even though it is installed.
+`postgresql@17` is **keg-only** — Homebrew normally keeps versioned formulae out of
+`PATH`. Here it is linked deliberately, so `psql` just works. That is why the
+Brewfile carries `link: true`: without it, `brew bundle check` reports
+*"postgresql@17 needs to be unlinked"* on every run and the whole check goes red.
 
 ```bash
-# once, in ~/.zshrc
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-
 brew services start postgresql@17     # start now + at login
 brew services stop  postgresql@17     # stop
 pg_isready                            # health check
