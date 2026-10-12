@@ -91,12 +91,14 @@ Everyday commands: `createdb NAME` · `dropdb NAME` · `psql -l` (list) ·
 |---|---|---|
 | ollama | LLM runtime/server (localhost:11434) | `brew services stop ollama; brew uninstall ollama` (models: `rm -rf ~/.ollama`) |
 | mlx-lm | Apple MLX inference/finetune | `brew uninstall mlx-lm` |
+| hf | Hugging Face CLI — model download + cache mgmt (`hf cache scan`) | `brew uninstall hf` |
 | open-webui | Self-hosted chat UI (desktop app) | `brew uninstall --cask open-webui` |
 | lm-studio | GUI model runner | `brew uninstall --cask lm-studio` |
 | anythingllm | Doc RAG desktop app | `brew uninstall --cask anythingllm` |
 | draw-things | Local image generation | `brew uninstall --cask draw-things` |
 | slicer, itk-snap | 3D Slicer / ITK-SNAP (medical imaging) | `brew uninstall --cask slicer itk-snap` |
 > ⚠️ **Conv3D gap:** PyTorch-MPS doesn't implement Conv3D. Heavy 3D CNN training → CPU fallback or CUDA/cloud. 2D + inference fine locally.
+> 📄 **Model choice, M5 specifics, what fits in 64 GB, CLI/GUI quickstart:** see [local-llm-mlx.md](local-llm-mlx.md).
 
 ## 6. Security / Pentest
 | Tool | What | Uninstall |
@@ -151,7 +153,8 @@ Everyday commands: `createdb NAME` · `dropdb NAME` · `psql -l` (list) ·
 | aerospace | i3-style tiling WM | `brew uninstall --cask aerospace` then `brew untap nikitabobko/tap` |
 | obsidian | PKM (local Markdown) | `brew uninstall --cask obsidian` |
 | shottr | Screenshots + OCR | `brew uninstall --cask shottr` |
-| jordanbaird-ice | Menu-bar manager (Ice) | `brew uninstall --cask jordanbaird-ice` |
+| jordanbaird-ice | Menu-bar manager (Ice). Keep **"Use Ice Bar" off** in 0.11.12 — crashes on macOS 26 | `brew uninstall --cask jordanbaird-ice` |
+| boring-notch | Notch as Dynamic Island: music, file shelf/AirDrop, calendar, HUD replacement | `brew uninstall --cask boring-notch` then `brew untap theboredteam/boring-notch` |
 | stats | Menu-bar system monitor | `brew uninstall --cask stats` |
 | alt-tab | Per-window switcher | `brew uninstall --cask alt-tab` |
 | maccy | Clipboard history | `brew uninstall --cask maccy` |
