@@ -16,6 +16,7 @@
 tap "nikitabobko/tap"        # AeroSpace tiling WM
 tap "netbirdio/tap"          # NetBird VPN
 tap "felixkratz/formulae"    # SketchyBar
+tap "theboredteam/boring-notch" # Boring.Notch
 
 # ---- 1. Terminal, Shell & modern CLI --------------------------------------
 cask "ghostty"                       # GPU terminal
@@ -69,6 +70,8 @@ cask "miniforge"                     # conda-forge for conda-only ML deps
 cask "visual-studio-code"
 cask "cursor"
 cask "claude-code"                   # Claude Code CLI + app (links `claude`)
+cask "codex"                         # OpenAI Codex CLI (coding agent)
+cask "chatgpt"                       # ChatGPT desktop app (includes the Codex UI since the Jul 2026 merge)
 brew "neovim"                        # LazyVim starter in post-install
 
 # ---- 4. Cloud / DevOps / Containers ---------------------------------------
@@ -101,14 +104,18 @@ cask "mongodb-compass"               # MongoDB GUI (browse/query/analyze)
 brew "mongosh"                       # MongoDB Shell (CLI companion)
 cask "redis-insight"                 # Redis GUI (official; connect to your own server)
 brew "redis"                         # Redis CLI (redis-cli); server NOT autostarted
+brew "postgresql@17", link: true     # PostgreSQL 17 (server + psql). Keg-only, linked on purpose
+cask "dbeaver-community"             # SQL GUI (Postgres/MySQL/SQLite/...); universal client
 
 # ---- 5. Local AI (LLM + ML/CV) --------------------------------------------
 brew "ollama"                        # LLM runtime/server (MLX-backed)
 brew "mlx-lm"                        # Apple MLX, max speed
+brew "hf"                            # Hugging Face CLI (model downloads / cache mgmt)
 cask "open-webui"                    # self-hosted chat hub (desktop app)
 cask "lm-studio"                     # GUI runtime
 cask "anythingllm"                   # doc RAG
 cask "draw-things"                   # local image gen (SD/Flux, Metal)
+cask "blender"                       # 3D modeling/rigging/animation; Claude drives it via the Blender MCP connector
 cask "slicer"                        # 3D Slicer (medical imaging)
 cask "itk-snap"                      # 3D segmentation GUI
 # Python ML stack via uv (post-install): torch torchvision monai SimpleITK jupyterlab diffusers
@@ -176,7 +183,8 @@ cask "rectangle"                     # window snapping
 cask "nikitabobko/tap/aerospace"     # i3-style tiling (to try)
 cask "obsidian"                      # PKM (local Markdown)
 cask "shottr"                        # screenshots + OCR (free)
-cask "jordanbaird-ice"               # menu-bar manager
+cask "jordanbaird-ice"               # menu-bar manager (0.11.12: leave "Use Ice Bar" OFF, crashes on macOS 26)
+cask "theboredteam/boring-notch/boring-notch" # notch -> Dynamic Island (music, file shelf, HUDs)
 cask "stats"                         # menu-bar system monitor
 cask "alt-tab"                       # per-window Alt-Tab
 cask "maccy"                         # clipboard history (free)

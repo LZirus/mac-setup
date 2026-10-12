@@ -47,7 +47,8 @@ Every installed tool with a one-line description and its exact uninstall command
 ## 4. Cloud / DevOps / Containers
 | Tool | What | Uninstall |
 |---|---|---|
-| colima, docker, docker-compose | Container runtime + CLI | `brew uninstall colima docker docker-compose` |
+| colima, docker, docker-compose | Container runtime + CLI (**default** — see docs/container-runtimes.md) | `brew uninstall colima docker docker-compose` |
+| apple `container` | VM-per-container runtime (macOS 26; .pkg, not brew; isolation/sandbox niche) | `/usr/local/bin/uninstall-container.sh -d` |
 | lazydocker, dive | Docker TUI / image inspector | `brew uninstall lazydocker dive` |
 | kubernetes-cli, k9s, helm, kustomize | kubectl + K8s ecosystem | `brew uninstall kubernetes-cli k9s helm kustomize` |
 | kubectx, stern, k3d | ctx/ns switch / log tail / local cluster | `brew uninstall kubectx stern k3d` |
@@ -59,19 +60,45 @@ Every installed tool with a one-line description and its exact uninstall command
 | mongodb-compass | MongoDB GUI (browse/query/analyze) | `brew uninstall --cask mongodb-compass` |
 | mongosh | MongoDB Shell (CLI) | `brew uninstall mongosh` |
 | redis-insight | Redis GUI (official; connect to your own server) | `brew uninstall --cask redis-insight` |
+| postgresql@17 | PostgreSQL 17 server + `psql`. Keg-only but **linked on purpose** (`link: true`) | `brew services stop postgresql@17 && brew uninstall postgresql@17` (data: `rm -rf /opt/homebrew/var/postgresql@17`) |
+| dbeaver-community | Universal SQL GUI (Postgres, MySQL, SQLite, ...) | `brew uninstall --cask dbeaver-community` |
 | redis | Redis CLI (`redis-cli`); server not autostarted | `brew uninstall redis` |
+
+### PostgreSQL — first run
+
+`postgresql@17` is **keg-only** — Homebrew normally keeps versioned formulae out of
+`PATH`. Here it is linked deliberately, so `psql` just works. That is why the
+Brewfile carries `link: true`: without it, `brew bundle check` reports
+*"postgresql@17 needs to be unlinked"* on every run and the whole check goes red.
+
+```bash
+brew services start postgresql@17     # start now + at login
+brew services stop  postgresql@17     # stop
+pg_isready                            # health check
+psql -d postgres                      # shell (superuser = your macOS user)
+```
+
+The install already created a cluster at `/opt/homebrew/var/postgresql@17`
+(locale `en_US.UTF-8`). There is **no** `postgres` role and no password — you
+connect as your macOS user via local socket. Fine for local dev, not for anything
+reachable from outside.
+
+Everyday commands: `createdb NAME` · `dropdb NAME` · `psql -l` (list) ·
+`psql -d NAME -f file.sql` · `pg_dump NAME > dump.sql`.
 
 ## 5. Local AI (LLM + ML/CV)
 | Tool | What | Uninstall |
 |---|---|---|
 | ollama | LLM runtime/server (localhost:11434) | `brew services stop ollama; brew uninstall ollama` (models: `rm -rf ~/.ollama`) |
 | mlx-lm | Apple MLX inference/finetune | `brew uninstall mlx-lm` |
+| hf | Hugging Face CLI — model download + cache mgmt (`hf cache scan`) | `brew uninstall hf` |
 | open-webui | Self-hosted chat UI (desktop app) | `brew uninstall --cask open-webui` |
 | lm-studio | GUI model runner | `brew uninstall --cask lm-studio` |
 | anythingllm | Doc RAG desktop app | `brew uninstall --cask anythingllm` |
 | draw-things | Local image generation | `brew uninstall --cask draw-things` |
 | slicer, itk-snap | 3D Slicer / ITK-SNAP (medical imaging) | `brew uninstall --cask slicer itk-snap` |
 > ⚠️ **Conv3D gap:** PyTorch-MPS doesn't implement Conv3D. Heavy 3D CNN training → CPU fallback or CUDA/cloud. 2D + inference fine locally.
+> 📄 **Model choice, M5 specifics, what fits in 64 GB, CLI/GUI quickstart:** see [local-llm-mlx.md](local-llm-mlx.md).
 
 ## 6. Security / Pentest
 | Tool | What | Uninstall |
@@ -126,7 +153,8 @@ Every installed tool with a one-line description and its exact uninstall command
 | aerospace | i3-style tiling WM | `brew uninstall --cask aerospace` then `brew untap nikitabobko/tap` |
 | obsidian | PKM (local Markdown) | `brew uninstall --cask obsidian` |
 | shottr | Screenshots + OCR | `brew uninstall --cask shottr` |
-| jordanbaird-ice | Menu-bar manager (Ice) | `brew uninstall --cask jordanbaird-ice` |
+| jordanbaird-ice | Menu-bar manager (Ice). Keep **"Use Ice Bar" off** in 0.11.12 — crashes on macOS 26 | `brew uninstall --cask jordanbaird-ice` |
+| boring-notch | Notch as Dynamic Island: music, file shelf/AirDrop, calendar, HUD replacement | `brew uninstall --cask boring-notch` then `brew untap theboredteam/boring-notch` |
 | stats | Menu-bar system monitor | `brew uninstall --cask stats` |
 | alt-tab | Per-window switcher | `brew uninstall --cask alt-tab` |
 | maccy | Clipboard history | `brew uninstall --cask maccy` |

@@ -3,6 +3,10 @@
 Colima provides the Docker daemon. Start it with `colima start` (or autostart via
 `brew services start colima`). These helper services run as containers.
 
+> Choosing a container runtime (Colima vs. Apple `container`)? See
+> [`container-runtimes.md`](container-runtimes.md). Colima is the daily driver; these
+> services assume the Docker daemon it provides.
+
 ## Portainer CE — web UI for Docker (containers/images/volumes/networks/stacks/k8s)
 ```bash
 docker volume create portainer_data
@@ -25,6 +29,21 @@ docker run -d --name dockge --restart=always -p 5001:5001 \
   louislam/dockge:1
 # → http://localhost:5001
 ```
+
+## `docker compose` (v2 syntax) — one symlink
+
+Homebrew installs Compose as a standalone `docker-compose` binary. The modern
+subcommand form `docker compose` needs it registered as a CLI plugin, otherwise
+you get `unknown shorthand flag: 'd' in -d` — a confusing error, because it looks
+like a flag problem, not a missing plugin.
+
+```bash
+mkdir -p ~/.docker/cli-plugins
+ln -sf /opt/homebrew/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+docker compose version    # verify
+```
+
+Both forms work afterwards. Every compose file in the wild assumes `docker compose`.
 
 ## Terminal alternative
 `lazydocker` (already installed) — TUI, no browser needed.
